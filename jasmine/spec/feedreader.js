@@ -29,30 +29,64 @@ $(function() {
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
-         * and that the URL is not empty.
+         * and that the URL is not empty. (step 8)
          */
+        it('url defined', function() {
+                allFeeds.forEach(function(feed) {
+                  expect(feed.url).toBeDefined();
+                  expect(feed.url.length).not.toBe(0);
+                });
 
-
+        });
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
+         * and that the name is not empty. (step 9)
          */
+        it('name defined', function() {
+                allFeeds.forEach(function(feed) {
+                  expect(feed.name).toBeDefined();
+                  expect(feed.name.length).not.toBe(0);
+                });
+        });
+
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* TODO: Write a new test suite named "The menu" (step 10)*/
+    /* TODO: Write a test that ensures the menu element is
+     * hidden by default. You'll have to analyze the HTML and
+     * the CSS to determine how we're performing the
+     * hiding/showing of the menu element. (step 11)
+     * reviwed using classList property at:
+     * https://www.w3schools.com/jsref/prop_element_classlist.asp
+     * contains: Returns a Boolean value, indicating whether an element has the
+     * specified class name.
+     */
+    describe('The menu', funtion() {
+      let  menu = document.querySelector('body');
+          it('menu hidden by default', function() {
+                expect(menu.classList.contains('menu-hidden')).toBe(true);
+          });
+     /* TODO: Write a test that ensures the menu changes
+      * visibility when the menu icon is clicked. This test
+      * should have two expectations: does the menu display when
+      * clicked and does it hide when clicked again. (step 12)
+      * reviwed Click() method use on:
+      * https://www.w3schools.com/jsref/met_html_click.asp
+      */
+          it('menu is visible when clicked', function() {
+                let menuIcon = document.querySelector('.menu-icon-link');
+                menuIcon.click();
+                expect(menu.classList.contains('menu-hidden')).toBe(false);
+                menuIcon.click();
+                expect(menu.classList.contains('menu-hidden')).toBe(true);
+          });
 
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
-         */
+    });
 
-         /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
+
+
+
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
