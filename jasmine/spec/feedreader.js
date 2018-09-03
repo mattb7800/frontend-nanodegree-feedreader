@@ -63,7 +63,7 @@ $(function() {
      * specified class name.
      */
     describe('The menu', funtion() {
-      let  menu = document.querySelector('body');
+          const menu = document.querySelector('body');
           it('menu hidden by default', function() {
                 expect(menu.classList.contains('menu-hidden')).toBe(true);
           });
@@ -75,7 +75,7 @@ $(function() {
       * https://www.w3schools.com/jsref/met_html_click.asp
       */
           it('menu is visible when clicked', function() {
-                let menuIcon = document.querySelector('.menu-icon-link');
+                const menuIcon = document.querySelector('.menu-icon-link');
                 menuIcon.click();
                 expect(menu.classList.contains('menu-hidden')).toBe(false);
                 menuIcon.click();
@@ -84,23 +84,50 @@ $(function() {
 
     });
 
+    /* TODO: Write a new test suite named "Initial Entries" (step 13) */
+    /* TODO: Write a test that ensures when the loadFeed
+     * function is called and completes its work, there is at least
+     * a single .entry element within the .feed container.
+     * Remember, loadFeed() is asynchronous so this test will require
+     * the use of Jasmine's beforeEach and asynchronous done() function.(step 14)
+     * Good info on the children property at:
+     * https://www.w3schools.com/jsref/prop_element_children.asp
+     */
+    describe('Initial Entries', function() {
+              const feed = document.querySelector('.feed');
+              beforeEach(function(done) {
+                loadFeed(0, done);
+              });
+              it('load feed with at least one entry', function() {
+                expect(feed.children.length > 0).toBe(true);
+              });
+    });
 
+    /* TODO: Write a new test suite named "New Feed Selection" (step 15)*/
+    /* TODO: Write a test that ensures when a new feed is loaded
+     * by the loadFeed function that the content actually changes.
+     * Remember, loadFeed() is asynchronous.(step 16)
+     */
+    describe('New Feed Selection', function() {
+              const feed = document.querySelector('.feed');
+              const InitalFeed = [];
+              const newFeed = [];
+    /* used Jasmine documentation for asynchronous work:
+     * https://jasmine.github.io/tutorials/async
+     */
+              beforeEach(function(done) {
+                loadFeed(0, function() {
+                  InitalFeed.push(feed.children[0].innerText);
+                  loadFeed(1, function() {
+                    newFeed.push(feed.children[0].innerText);
+                  done();
+                });
 
+              });
+            });
+            it('content changes', function() {
+                expect(InitalFeed === newFeed).toBe(false);
+            });
+    });
 
-
-    /* TODO: Write a new test suite named "Initial Entries" */
-
-        /* TODO: Write a test that ensures when the loadFeed
-         * function is called and completes its work, there is at least
-         * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
-
-    /* TODO: Write a new test suite named "New Feed Selection" */
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
 }());
