@@ -62,7 +62,7 @@ $(function() {
      * contains: Returns a Boolean value, indicating whether an element has the
      * specified class name.
      */
-    describe('The menu', funtion() {
+    describe('The menu', function() {
           const menu = document.querySelector('body');
           it('menu hidden by default', function() {
                 expect(menu.classList.contains('menu-hidden')).toBe(true);
