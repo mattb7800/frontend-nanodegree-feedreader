@@ -1,13 +1,4 @@
-/* feedreader.js
- *
- * This is the spec file that Jasmine will read and contains
- * all of the tests that will be run against your application.
- */
-
-/* We're placing all of our tests within the $() function,
- * since some of these tests may require DOM elements. We want
- * to ensure they don't run until the DOM is ready.
- */
+/* feedreader.js */
 $(function() {
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
@@ -27,7 +18,7 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Test loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty. (step 8)
          */
@@ -38,7 +29,7 @@ $(function() {
                 });
 
         });
-        /* TODO: Write a test that loops through each feed
+        /* Test loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty. (step 9)
          */
@@ -52,29 +43,27 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" (step 10)*/
-    /* TODO: Write a test that ensures the menu element is
-     * hidden by default. You'll have to analyze the HTML and
-     * the CSS to determine how we're performing the
-     * hiding/showing of the menu element. (step 11)
+    /* Wrote a new test suite named "The menu" (step 10)*/
+    /* Test that ensures the menu element is
+     * hidden by default.  (step 11)
      * reviwed using classList property at:
      * https://www.w3schools.com/jsref/prop_element_classlist.asp
      * contains: Returns a Boolean value, indicating whether an element has the
      * specified class name.
      */
     describe('The menu', function() {
-          const menu = document.querySelector('body');
-          it('menu hidden by default', function() {
+        const menu = document.querySelector('body');
+        it('menu hidden by default', function() {
                 expect(menu.classList.contains('menu-hidden')).toBe(true);
           });
-     /* TODO: Write a test that ensures the menu changes
+     /* Wrote a test that ensures the menu changes
       * visibility when the menu icon is clicked. This test
-      * should have two expectations: does the menu display when
-      * clicked and does it hide when clicked again. (step 12)
+      * should has two expectations: The menu is displayed when
+      * clicked and it is hidden when clicked again. (step 12)
       * reviwed Click() method use on:
       * https://www.w3schools.com/jsref/met_html_click.asp
       */
-          it('menu is visible when clicked', function() {
+        it('menu is visible when clicked', function() {
                 const menuIcon = document.querySelector('.menu-icon-link');
                 menuIcon.click();
                 expect(menu.classList.contains('menu-hidden')).toBe(false);
@@ -84,29 +73,32 @@ $(function() {
 
     });
 
-    /* TODO: Write a new test suite named "Initial Entries" (step 13) */
-    /* TODO: Write a test that ensures when the loadFeed
+    /* Wrote a new test suite named "Initial Entries" (step 13) */
+    /* Wrote a test that ensures when the loadFeed
      * function is called and completes its work, there is at least
      * a single .entry element within the .feed container.
-     * Remember, loadFeed() is asynchronous so this test will require
+     * The loadFeed() is asynchronous requires
      * the use of Jasmine's beforeEach and asynchronous done() function.(step 14)
      * Good info on the children property at:
      * https://www.w3schools.com/jsref/prop_element_children.asp
+     * Thanks to first review on pointing me in the right direction to get
+     * the parent and child for the Initial Entries test suite.
      */
     describe('Initial Entries', function() {
-              const feed = document.querySelector('.feed');
-              beforeEach(function(done) {
-                loadFeed(0, done);
-              });
-              it('load feed with at least one entry', function() {
-                expect(feed.children.length > 0).toBe(true);
+
+        beforeEach(function(done) {
+            loadFeed(0, done);
+        });
+        it('load feed with at least one entry', function() {
+                const InitEntry = document.querySelectorAll('.feed .entry');
+                expect(InitEntry.length > 0).toBe(true);
               });
     });
 
-    /* TODO: Write a new test suite named "New Feed Selection" (step 15)*/
-    /* TODO: Write a test that ensures when a new feed is loaded
+    /* Wrote a new test suite named "New Feed Selection" (step 15)*/
+    /* Wrote a test that ensures when a new feed is loaded
      * by the loadFeed function that the content actually changes.
-     * Remember, loadFeed() is asynchronous.(step 16)
+     * (step 16)
      */
     describe('New Feed Selection', function() {
               const feed = document.querySelector('.feed');
@@ -126,7 +118,7 @@ $(function() {
               });
             });
             it('content changes', function() {
-                expect(InitalFeed === newFeed).toBe(false);
+                expect(InitalFeed).not.toEqual(newFeed);
             });
     });
 
