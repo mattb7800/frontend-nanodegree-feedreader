@@ -90,9 +90,9 @@ $(function() {
             loadFeed(0, done);
         });
         it('load feed with at least one entry', function() {
-                const InitEntry = document.querySelectorAll('.feed .entry');
-                expect(InitEntry.length > 0).toBe(true);
-              });
+            const InitEntry = document.querySelectorAll('.feed .entry');
+            expect(InitEntry.length > 0).toBe(true);
+        });
     });
 
     /* Wrote a new test suite named "New Feed Selection" (step 15)*/
@@ -101,25 +101,25 @@ $(function() {
      * (step 16)
      */
     describe('New Feed Selection', function() {
-              const feed = document.querySelector('.feed');
-              const InitalFeed = [];
-              const newFeed = [];
+            const feed = document.querySelector('.feed');
+            const InitalFeed = [];
+            const newFeed = [];
     /* used Jasmine documentation for asynchronous work:
      * https://jasmine.github.io/tutorials/async
      */
-              beforeEach(function(done) {
-                loadFeed(0, function() {
-                  InitalFeed.push(feed.children[0].innerText);
-                  loadFeed(1, function() {
-                    newFeed.push(feed.children[0].innerText);
-                  done();
-                });
-
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+              InitalFeed.push(feed.children[0].innerText);
+              loadFeed(1, function() {
+                newFeed.push(feed.children[0].innerText);
+                done();
               });
+
             });
-            it('content changes', function() {
-                expect(InitalFeed).not.toEqual(newFeed);
-            });
+        });
+        it('content changes', function() {
+            expect(InitalFeed).not.toEqual(newFeed);
+        });
     });
 
 }());
